@@ -17,6 +17,28 @@ const Sidebar = ({ prompts, featureToggleConfig }) => {
     "/creative-matrix": "creative-matrix",
     "/knowledge-chat": "knowledgeChat",
     "/": "dashboard",
+    "/prd-analysis": "prd-analysis",
+    "/root-cause-analysis": "root-cause-analysis",
+    "/user-journey-mapping": "user-journey-mapping",
+    "/personas": "personas",
+    "/stakeholder-mapping": "stakeholder-mapping",
+    "/user-testing": "user-testing",
+    "/feature-mapping": "feature-mapping",
+    "/story-slicing": "story-slicing",
+    "/user-stories": "user-stories",
+    "/tech-tasks": "tech-tasks",
+    "/estimations": "estimations",
+    "/roadmap": "roadmap",
+    "/architecture-analysis": "architecture-analysis",
+    "/sequence-diagramming": "sequence-diagramming",
+    "/user-system-flows": "user-system-flows",
+    "/dependency-mapping": "dependency-mapping",
+    "/decision-logging": "decision-logging",
+    "/ceremonies": "ceremonies",
+    "/release-train": "release-train",
+    "/incident-management": "incident-management",
+    "/risks-assumptions": "risks-assumptions",
+    "/metrics-dashboard": "metrics-dashboard",
   };
   const router = useRouter();
   const currentSelectedKey = pathToKey[router.pathname];
@@ -90,6 +112,10 @@ const Sidebar = ({ prompts, featureToggleConfig }) => {
 
     const finalMenuItems = [];
     Object.keys(menuCategories).forEach((key) => {
+      if (menuCategories[key].show === false) {
+        return;
+      }
+
       // Handle divider or group type categories
       if (
         menuCategories[key].type === "divider" ||
@@ -108,6 +134,8 @@ const Sidebar = ({ prompts, featureToggleConfig }) => {
             : b.label.props.children;
           return aText.localeCompare(bText);
         });
+        finalMenuItems.push(menuCategories[key]);
+      } else {
         finalMenuItems.push(menuCategories[key]);
       }
     });

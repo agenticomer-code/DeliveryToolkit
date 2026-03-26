@@ -48,7 +48,10 @@ describe("Sidebar Component", () => {
       screen.getByRole("link", { name: /Chat with Haiven/i }),
     ).toBeInTheDocument();
     expect(screen.getByText(/Discovery/i)).toBeInTheDocument();
-    expect(screen.queryByText(/Architecture/i)).not.toBeInTheDocument(); // No hard-coded entry, so it shouldn't show up
+    expect(screen.getByText(/Requirements/i)).toBeInTheDocument();
+    expect(screen.getByText(/Architecture/i)).toBeInTheDocument();
+    expect(screen.getByText(/Delivery/i)).toBeInTheDocument();
+    expect(screen.getByText(/Reporting/i)).toBeInTheDocument();
   });
 
   it("should render menu items with prompts", async () => {
@@ -146,7 +149,7 @@ describe("Sidebar Component", () => {
         );
       });
 
-      expect(screen.queryByText(/^Delivery/i)).not.toBeInTheDocument();
+      expect(screen.getByText(/^Delivery/i)).toBeInTheDocument();
       expect(screen.queryByText(/AHM Process/i)).not.toBeInTheDocument();
     });
 
@@ -166,7 +169,7 @@ describe("Sidebar Component", () => {
         );
       });
 
-      expect(screen.queryByText(/^Delivery/i)).not.toBeInTheDocument();
+      expect(screen.getByText(/^Delivery/i)).toBeInTheDocument();
       expect(screen.queryByText(/AHM Process/i)).not.toBeInTheDocument();
     });
 
@@ -325,8 +328,8 @@ describe("Sidebar Component", () => {
         screen.queryByText(/Client Research Prompt/i),
       ).not.toBeInTheDocument();
 
-      // Reporting category should not be present at all
-      expect(screen.queryByText(/Reporting/i)).not.toBeInTheDocument();
+      // Reporting category is visible but should not include thoughtworks-only prompt
+      expect(screen.getByText(/Reporting/i)).toBeInTheDocument();
     });
   });
 });

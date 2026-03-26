@@ -26,15 +26,24 @@ const CATEGORY_TO_SECTION_MAP = {
   research: "discovery",
   "client-research": "discovery",
   analysis: "requirements",
+  analyse: "requirements",
+  requirements: "requirements",
   architecture: "architecture",
   coding: "delivery",
   testing: "delivery",
   deliveryManagement: "delivery",
+  delivery: "delivery",
+  discovery: "discovery",
+  reporting: "reporting",
   other: "reporting",
 };
 
-export const normalizeCategoryForSection = (category) =>
-  CATEGORY_TO_SECTION_MAP[category] || "reporting";
+export const normalizeCategoryForSection = (category) => {
+  const normalizedCategory = String(category || "")
+    .trim()
+    .toLowerCase();
+  return CATEGORY_TO_SECTION_MAP[normalizedCategory] || "reporting";
+};
 
 export const normalizePromptCategories = (categories = []) => {
   if (!categories.length) {
@@ -117,31 +126,129 @@ export const initialiseMenuCategoriesForSidebar = (isThoughtworksInstance) => {
           key: "scenarios",
           label: <Link href="/scenarios">Scenario Design</Link>,
         },
+        {
+          key: "prd-analysis",
+          label: <Link href="/prd-analysis">PRD Analysis</Link>,
+        },
+        {
+          key: "root-cause-analysis",
+          label: <Link href="/root-cause-analysis">Root Cause Analysis</Link>,
+        },
+        {
+          key: "user-journey-mapping",
+          label: <Link href="/user-journey-mapping">User Journey Mapping</Link>,
+        },
+        {
+          key: "personas",
+          label: <Link href="/personas">Personas</Link>,
+        },
+        {
+          key: "stakeholder-mapping",
+          label: <Link href="/stakeholder-mapping">Stakeholder Mapping</Link>,
+        },
+        {
+          key: "user-testing",
+          label: <Link href="/user-testing">User Testing (Guerrilla)</Link>,
+        },
       ],
     };
     categories.requirements = {
       key: "requirements",
       label: "Requirements",
       icon: <RiFileList3Line style={{ fontSize: "large" }} />,
-      children: [],
+      children: [
+        {
+          key: "feature-mapping",
+          label: <Link href="/feature-mapping">Feature Mapping</Link>,
+        },
+        {
+          key: "story-slicing",
+          label: <Link href="/story-slicing">Story Slicing</Link>,
+        },
+        {
+          key: "user-stories",
+          label: <Link href="/user-stories">User Stories</Link>,
+        },
+        {
+          key: "tech-tasks",
+          label: <Link href="/tech-tasks">Tech Tasks</Link>,
+        },
+        {
+          key: "estimations",
+          label: <Link href="/estimations">Estimations</Link>,
+        },
+        {
+          key: "roadmap",
+          label: <Link href="/roadmap">Roadmap / Jira Integration</Link>,
+        },
+      ],
     };
     categories.delivery = {
       key: "delivery",
       label: "Delivery",
       icon: <RiRocket2Line style={{ fontSize: "large" }} />,
-      children: [],
+      children: [
+        {
+          key: "ceremonies",
+          label: <Link href="/ceremonies">Ceremonies</Link>,
+        },
+        {
+          key: "release-train",
+          label: <Link href="/release-train">Release Train</Link>,
+        },
+        {
+          key: "incident-management",
+          label: (
+            <Link href="/incident-management">
+              Incident Management / Post-Mortems
+            </Link>
+          ),
+        },
+        {
+          key: "risks-assumptions",
+          label: <Link href="/risks-assumptions">Risks / Assumptions</Link>,
+        },
+      ],
     };
     categories.architecture = {
       key: "architecture",
       label: "Architecture",
       icon: <RiCompasses2Line style={{ fontSize: "large" }} />,
-      children: [],
+      children: [
+        {
+          key: "architecture-analysis",
+          label: (
+            <Link href="/architecture-analysis">Architecture Analysis (C4)</Link>
+          ),
+        },
+        {
+          key: "sequence-diagramming",
+          label: <Link href="/sequence-diagramming">Sequence Diagramming</Link>,
+        },
+        {
+          key: "user-system-flows",
+          label: <Link href="/user-system-flows">User / System Flows</Link>,
+        },
+        {
+          key: "dependency-mapping",
+          label: <Link href="/dependency-mapping">Dependency Mapping</Link>,
+        },
+        {
+          key: "decision-logging",
+          label: <Link href="/decision-logging">Decision Logging</Link>,
+        },
+      ],
     };
     categories.reporting = {
       key: "reporting",
       label: "Reporting",
       icon: <RiBarChartBoxLine style={{ fontSize: "large" }} />,
-      children: [],
+      children: [
+        {
+          key: "metrics-dashboard",
+          label: <Link href="/metrics-dashboard">Metrics and Dashboard</Link>,
+        },
+      ],
     };
     categories.other = {
       key: "other",
