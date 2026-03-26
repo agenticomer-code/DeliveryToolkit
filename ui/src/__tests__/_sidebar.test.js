@@ -47,7 +47,7 @@ describe("Sidebar Component", () => {
     expect(
       screen.getByRole("link", { name: /Chat with Haiven/i }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/Ideate/i)).toBeInTheDocument();
+    expect(screen.getByText(/Discovery/i)).toBeInTheDocument();
     expect(screen.queryByText(/Architecture/i)).not.toBeInTheDocument(); // No hard-coded entry, so it shouldn't show up
   });
 
@@ -60,12 +60,11 @@ describe("Sidebar Component", () => {
       render(<Sidebar prompts={mockPrompts} featureToggleConfig={{}} />);
     });
 
-    expect(screen.getByText(/Research/i)).toBeInTheDocument();
-    expect(screen.getByText(/Testing/i)).toBeInTheDocument();
-    expect(screen.getByText(/Coding/i)).toBeInTheDocument();
+    expect(screen.getByText(/Discovery/i)).toBeInTheDocument();
+    expect(screen.getByText(/Delivery/i)).toBeInTheDocument();
 
     await act(async () => {
-      screen.getByText(/Research/i).click();
+      screen.getByText(/Discovery/i).click();
     });
     expect(screen.getByText(/User person creation/i)).toBeInTheDocument();
   });
@@ -80,7 +79,7 @@ describe("Sidebar Component", () => {
     });
 
     await act(async () => {
-      screen.getByText(/Research/i).click();
+      screen.getByText(/Discovery/i).click();
     });
 
     expect(screen.getByText(/User person creation/i)).toBeInTheDocument();
@@ -187,8 +186,8 @@ describe("Sidebar Component", () => {
         );
       });
 
-      expect(screen.getByText(/Ideate/i)).toBeInTheDocument();
-      const ideate = screen.getByText(/Ideate/i);
+      expect(screen.getByText(/Discovery/i)).toBeInTheDocument();
+      const ideate = screen.getByText(/Discovery/i);
       await act(async () => {
         ideate.click();
       });
@@ -230,7 +229,7 @@ describe("Sidebar Component", () => {
         );
       });
 
-      const researchCategory = screen.getByText(/Research/i);
+      const researchCategory = screen.getByText(/Discovery/i);
       await act(async () => {
         researchCategory.click();
       });
@@ -260,7 +259,7 @@ describe("Sidebar Component", () => {
         );
       });
 
-      const researchCategory = screen.getByText(/Research/i);
+      const researchCategory = screen.getByText(/Discovery/i);
       await act(async () => {
         researchCategory.click();
       });
@@ -296,7 +295,7 @@ describe("Sidebar Component", () => {
       },
     ];
 
-    it("should not add Thoughtworks-only category prompts to 'Other' when feature flag is false", async () => {
+    it("should not add Thoughtworks-only category prompts to reporting when feature flag is false", async () => {
       const Sidebar = (await import("../pages/_sidebar")).default;
 
       useRouter.mockReturnValue({
@@ -326,8 +325,8 @@ describe("Sidebar Component", () => {
         screen.queryByText(/Client Research Prompt/i),
       ).not.toBeInTheDocument();
 
-      // Other category should not be present at all
-      expect(screen.queryByText(/Other/i)).not.toBeInTheDocument();
+      // Reporting category should not be present at all
+      expect(screen.queryByText(/Reporting/i)).not.toBeInTheDocument();
     });
   });
 });

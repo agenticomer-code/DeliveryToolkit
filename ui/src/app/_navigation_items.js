@@ -1,14 +1,13 @@
 // © 2024 Thoughtworks, Inc. | Licensed under the Apache License, Version 2.0  | See LICENSE.md file for permissions.
 import Link from "next/link";
 import {
-  RiFlaskLine,
-  RiLightbulbLine,
-  RiCodeBoxLine,
-  RiBookReadLine,
+  RiCompassDiscoverLine,
+  RiFileList3Line,
+  RiRocket2Line,
+  RiBarChartBoxLine,
   RiChat2Line,
   RiChatQuoteLine,
   RiCompasses2Line,
-  RiBook2Line,
   RiDashboardHorizontalLine,
   RiGlobalLine,
   RiBriefcase2Line,
@@ -21,6 +20,29 @@ export const THOUGHTWORKS_ONLY_CATEGORIES = [
   "client-research",
   "deliveryManagement",
 ];
+
+const CATEGORY_TO_SECTION_MAP = {
+  ideate: "discovery",
+  research: "discovery",
+  "client-research": "discovery",
+  analysis: "requirements",
+  architecture: "architecture",
+  coding: "delivery",
+  testing: "delivery",
+  deliveryManagement: "delivery",
+  other: "reporting",
+};
+
+export const normalizeCategoryForSection = (category) =>
+  CATEGORY_TO_SECTION_MAP[category] || "reporting";
+
+export const normalizePromptCategories = (categories = []) => {
+  if (!categories.length) {
+    return ["reporting"];
+  }
+
+  return [...new Set(categories.map(normalizeCategoryForSection))];
+};
 
 export const initialiseMenuCategoriesForSidebar = (isThoughtworksInstance) => {
   const addThoughtworksMenuItems = (categories) => {
@@ -82,16 +104,10 @@ export const initialiseMenuCategoriesForSidebar = (isThoughtworksInstance) => {
       className: "menu-divider",
       type: "group",
     };
-    categories.research = {
-      key: "research",
-      label: "Research",
-      icon: <RiBook2Line style={{ fontSize: "large" }} />,
-      children: [],
-    };
-    categories.ideate = {
-      key: "ideate",
-      label: "Ideate",
-      icon: <RiLightbulbLine style={{ fontSize: "large" }} />,
+    categories.discovery = {
+      key: "discovery",
+      label: "Discovery",
+      icon: <RiCompassDiscoverLine style={{ fontSize: "large" }} />,
       children: [
         {
           key: "creative-matrix",
@@ -103,22 +119,16 @@ export const initialiseMenuCategoriesForSidebar = (isThoughtworksInstance) => {
         },
       ],
     };
-    categories.analysis = {
-      key: "analyse",
-      label: "Analyse",
-      icon: <RiBookReadLine style={{ fontSize: "large" }} />,
+    categories.requirements = {
+      key: "requirements",
+      label: "Requirements",
+      icon: <RiFileList3Line style={{ fontSize: "large" }} />,
       children: [],
     };
-    categories.coding = {
-      key: "coding",
-      label: "Coding",
-      icon: <RiCodeBoxLine style={{ fontSize: "large" }} />,
-      children: [],
-    };
-    categories.testing = {
-      key: "testing",
-      label: "Testing",
-      icon: <RiFlaskLine style={{ fontSize: "large" }} />,
+    categories.delivery = {
+      key: "delivery",
+      label: "Delivery",
+      icon: <RiRocket2Line style={{ fontSize: "large" }} />,
       children: [],
     };
     categories.architecture = {
@@ -127,12 +137,24 @@ export const initialiseMenuCategoriesForSidebar = (isThoughtworksInstance) => {
       icon: <RiCompasses2Line style={{ fontSize: "large" }} />,
       children: [],
     };
+    categories.reporting = {
+      key: "reporting",
+      label: "Reporting",
+      icon: <RiBarChartBoxLine style={{ fontSize: "large" }} />,
+      children: [],
+    };
     categories.other = {
       key: "other",
       label: "Other",
       icon: <RiChat2Line style={{ fontSize: "large" }} />,
       children: [],
+      show: false,
     };
+    categories.research = { key: "research", show: false, children: [] };
+    categories.ideate = { key: "ideate", show: false, children: [] };
+    categories.analysis = { key: "analysis", show: false, children: [] };
+    categories.coding = { key: "coding", show: false, children: [] };
+    categories.testing = { key: "testing", show: false, children: [] };
   };
 
   const categories = {

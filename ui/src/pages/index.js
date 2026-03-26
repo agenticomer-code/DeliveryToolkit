@@ -9,6 +9,7 @@ import {
 } from "../app/_boba_api";
 import {
   initialiseMenuCategoriesForSidebar,
+  normalizePromptCategories,
   staticFeaturesForDashboard,
 } from "../app/_navigation_items";
 import DisclaimerPopup from "../app/_disclaimer_popup";
@@ -29,23 +30,27 @@ export default function ChatDashboard() {
 
   // !! If changed, also needs to be changed in CSS, for the filter selection colors
   const categoryColors = {
-    ideate: "#6B9E78",
-    research: "#003d4f",
-    analysis: "#f2617aff",
-    coding: "#CC850A",
-    testing: "#47a1ad",
+    discovery: "#6B9E78",
+    requirements: "#f2617aff",
     architecture: "#634F7D",
-    other: "#666666ff",
+    delivery: "#CC850A",
+    reporting: "#666666ff",
+  };
+
+  const categoryLabels = {
+    discovery: "Discovery",
+    requirements: "Requirements",
+    architecture: "Architecture",
+    delivery: "Delivery",
+    reporting: "Reporting",
   };
 
   const categoryOrder = [
-    "research",
-    "ideate",
-    "analysis",
-    "coding",
-    "testing",
+    "discovery",
+    "requirements",
     "architecture",
-    "other",
+    "delivery",
+    "reporting",
   ];
 
   const filter = (tag, checked) => {
@@ -96,28 +101,36 @@ export default function ChatDashboard() {
       }
     });
 
-    const activeCategories = Object.keys(
+    const activeCategories = Object.values(
       initialiseMenuCategoriesForSidebar(
         featureToggleConfig[FEATURES.THOUGHTWORKS] === true,
       ),
-    );
+    )
+      .filter((category) => category?.show !== false && category?.children)
+      .map((category) => category.key);
 
     getPrompts((data) => {
       data = data
         .filter((prompt) => prompt.show !== false)
         .filter((prompt) => {
+          const normalizedCategories = normalizePromptCategories(prompt.categories);
           const includePrompt = activeCategories.some((category) =>
-            prompt.categories.includes(category),
+            normalizedCategories.includes(category),
           );
           return includePrompt;
         })
         .map((prompt) => {
           const url = typeToUrlMap[prompt.type] || "/chat";
           prompt.link = `${url}?prompt=${prompt.identifier}`;
+          prompt.categories = normalizePromptCategories(prompt.categories);
           return prompt;
         });
       // add the "static" features
       data = data.concat(staticFeaturesForDashboard());
+      data = data.map((prompt) => ({
+        ...prompt,
+        categories: normalizePromptCategories(prompt.categories),
+      }));
 
       data.forEach((prompt) => {
         sortCategoriesByOrder(prompt.categories);
@@ -144,8 +157,6 @@ export default function ChatDashboard() {
       const categories = [
         ...new Set(data.flatMap((prompt) => prompt.categories)),
       ];
-      categories.push("other");
-
       sortCategoriesByOrder(categories);
       setAllCategories(categories);
       setSelectedCategories(categories);
@@ -229,7 +240,7 @@ export default function ChatDashboard() {
                             color="gray"
                             className={"dashboard-filter-category " + tag}
                           >
-                            {tag}
+                            {categoryLabels[tag] || tag}
                           </Tag.CheckableTag>
                         ))}
                       </p>
@@ -250,10 +261,10 @@ export default function ChatDashboard() {
                                     className="capitalize"
                                     color={
                                       categoryColors[category] ||
-                                      categoryColors["other"]
+                                      categoryColors["reporting"]
                                     }
                                   >
-                                    {category}
+                                    {categoryLabels[category] || category}
                                   </Tag>
                                 ))}
                               >

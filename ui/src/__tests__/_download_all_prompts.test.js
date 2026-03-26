@@ -26,7 +26,7 @@ describe("DownloadAllPrompts", () => {
     {
       identifier: "prompt-3",
       title: "Prompt 3",
-      categories: ["coding"],
+      categories: ["delivery"],
       download_restricted: false,
     },
   ];
@@ -62,7 +62,7 @@ describe("DownloadAllPrompts", () => {
 
     // Should show categories that have downloadable prompts (with proper capitalization)
     expect(screen.getByText("Architecture")).toBeInTheDocument();
-    expect(screen.getByText("Coding")).toBeInTheDocument();
+    expect(screen.getByText("Delivery")).toBeInTheDocument();
   });
 
   it("shows download all prompts option", () => {

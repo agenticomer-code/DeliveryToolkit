@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { RiGlobalLine } from "react-icons/ri";
 import {
   initialiseMenuCategoriesForSidebar,
+  normalizePromptCategories,
   THOUGHTWORKS_ONLY_CATEGORIES,
 } from "../app/_navigation_items";
 import { FEATURES } from "../app/feature_toggle";
@@ -48,8 +49,9 @@ const Sidebar = ({ prompts, featureToggleConfig }) => {
       })
       .forEach((prompt) => {
         const url = typeToUrlMap[prompt.type] || "/chat";
-        prompt.categories.forEach((category) => {
-          // For categories that are Thoughtworks-only - if they are not available, do not add to "Other"
+        const normalizedCategories = normalizePromptCategories(prompt.categories);
+        normalizedCategories.forEach((category) => {
+          // For categories that are Thoughtworks-only - if unavailable, do not show them
           if (
             THOUGHTWORKS_ONLY_CATEGORIES.includes(category) &&
             !isThoughtworksInstance
@@ -57,7 +59,7 @@ const Sidebar = ({ prompts, featureToggleConfig }) => {
             return;
           }
           const menuCategory =
-            menuCategories[category] || menuCategories["other"];
+            menuCategories[category] || menuCategories["reporting"];
           // Skip if this is a group or divider type category
           if (menuCategory.type === "divider" || menuCategory.type === "group")
             return;
