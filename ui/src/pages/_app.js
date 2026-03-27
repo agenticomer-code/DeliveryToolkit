@@ -160,7 +160,7 @@ export default function App({
           >
             <Header featureToggleConfig={featureToggleConfig} />
           </Layout.Header>
-          <Layout style={{ marginTop: "65px", flex: 1, overflow: "hidden" }}>
+          <Layout style={{ marginTop: "102px", flex: 1, overflow: "hidden" }}>
             <Layout.Sider
               theme="light"
               collapsible
