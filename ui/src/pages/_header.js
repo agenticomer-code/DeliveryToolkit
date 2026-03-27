@@ -58,7 +58,7 @@ export default function Header({ featureToggleConfig }) {
                 <Link href="/about">About</Link>
               </span>
               <span type="link">
-                <Link href="/knowledge">Knowledge Overview</Link>
+                <Link href="/knowledge">Choreograph Overview</Link>
               </span>
               {featureToggleConfig[FEATURES.API_KEY_AUTH_UI] === true && (
                 <span type="link">

@@ -21,6 +21,12 @@ const KnowledgePackPage = ({
     const renderContexts = [];
 
     contexts.forEach((context) => {
+      if (
+        context.context === "demo_crn" ||
+        context.context === "demo_ev_charging_station"
+      ) {
+        return;
+      }
       if (context.snippets && Object.keys(context.snippets).length > 0) {
         const snippetsInContext = Object.keys(context.snippets).map(
           (key, snippetIndex) => {
@@ -79,15 +85,15 @@ const KnowledgePackPage = ({
     <div id="canvas">
       <div className={"knowledge-overview"}>
         <div className="knowledge-overview-header">
-          <h1>Your knowledge</h1>
+          <h1>Choreograph Knowledge</h1>
           <div className="download-buttons">
             <DownloadAllPrompts prompts={prompts} />
             <DownloadRules rules={rules} />
           </div>
         </div>
         <p>
-          This page shows an overview of the knowledge you currently have in
-          your knowledge pack.
+          This page shows an overview of all product related Choreograph domain
+          details.
         </p>
         <div className="knowledge-columns-container">
           <div className="knowledge-list">
