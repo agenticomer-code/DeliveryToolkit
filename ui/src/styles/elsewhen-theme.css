@@ -1,0 +1,18 @@
+:root {
+  --color-bg-primary: #0d0b0b;
+  --color-bg-secondary: #1f1f1f;
+  --color-text-primary: #f0f0f0;
+  --color-text-supportive-1: #a7a7a7;
+  --color-text-supportive-2: #807d7d;
+  --color-accent-yellow: #F8F034;
+  --color-black: #161314;
+  --color-blue-dark: #001F4F;
+  --color-blue-mid: #00317B;
+  --color-white: #FFFFFF;
+  --color-grey-300: #99A0A9;
+  --color-grey-700: #1D1F21;
+  --color-border: rgba(240,240,240,0.25);
+  --font-display: 'F37 Jagger', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-ui: 'Inter', sans-serif;
+}

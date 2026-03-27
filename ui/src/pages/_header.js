@@ -30,11 +30,7 @@ export default function Header({ featureToggleConfig }) {
       <div className="page-header">
         <header className="header">
           <div className="left-section">
-            <div className="logo">
-              <img src="/boba/thoughtworks_logo.png" alt="Logo" />
-            </div>
-            <div className="separator"></div>
-            <div className="title">Haiven team assistant</div>
+            <div className="brand">Elsewhen</div>
           </div>
           <div
             className="header-links"
@@ -75,7 +71,7 @@ export default function Header({ featureToggleConfig }) {
               <Button
                 type="link"
                 onClick={openPinboard}
-                style={{ color: "white" }}
+                style={{ color: "#f0f0f0", fontFamily: "var(--font-display)", fontSize: "16px" }}
               >
                 <RiPushpinLine fontSize="large" />
                 Pinboard

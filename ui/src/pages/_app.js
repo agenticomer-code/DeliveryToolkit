@@ -97,7 +97,10 @@ export default function App({
             lineType: "none",
             motion: "false",
             // Alias Token
-            colorBgContainer: colorlightgray,
+            colorBgContainer: "#1f1f1f",
+            colorBgElevated: "#1f1f1f",
+            colorText: "#f0f0f0",
+            colorTextBase: "#f0f0f0",
           },
           components: {
             Menu: {
@@ -121,6 +124,9 @@ export default function App({
       >
         <Head>
           <title>Haiven</title>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
           <meta property="og:image" content="/boba/social-preview-image.png" />
           <meta property="og:title" content="Haiven team assistant" />
@@ -145,7 +151,7 @@ export default function App({
           <Layout.Header
             style={{
               position: "fixed",
-              height: "65px",
+              height: "auto",
               padding: 0,
               top: 0,
               zIndex: 20,
@@ -154,13 +160,14 @@ export default function App({
           >
             <Header featureToggleConfig={featureToggleConfig} />
           </Layout.Header>
-          <Layout style={{ marginTop: "64px", flex: 1, overflow: "hidden" }}>
+          <Layout style={{ marginTop: "65px", flex: 1, overflow: "hidden" }}>
             <Layout.Sider
               theme="light"
               collapsible
               collapsed={collapsed}
               onCollapse={(value) => setCollapsed(value)}
               width={250}
+              style={{ background: "#1f1f1f" }}
             >
               <Sidebar
                 selectedKey={selectedKey}
@@ -169,7 +176,7 @@ export default function App({
                 featureToggleConfig={featureToggleConfig}
               />
             </Layout.Sider>
-            <Layout.Content style={{ overflow: "auto", background: "white" }}>
+            <Layout.Content style={{ overflow: "auto", background: "#0d0b0b" }}>
               <Component
                 {...pageProps}
                 prompts={prompts}

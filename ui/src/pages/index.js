@@ -317,7 +317,7 @@ export default function ChatDashboard() {
                                   key={`inspiration-card-${index}`}
                                   title={inspiration.title}
                                   className="dashboard-tile scenario-card-content"
-                                  style={{ backgroundColor: "#f5f5f5" }}
+                                  style={{ backgroundColor: "var(--color-bg-secondary)" }}
                                 >
                                   {inspiration.prompt_template.substring(
                                     0,

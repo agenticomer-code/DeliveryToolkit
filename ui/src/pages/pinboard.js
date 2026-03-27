@@ -167,7 +167,7 @@ const Pinboard = ({ isModalVisible, onClose }) => {
             actions={[
               <div
                 className="pinboard-card-action-items"
-                style={{ backgroundColor: "#f9f9f9" }}
+                style={{ backgroundColor: "var(--color-bg-secondary)" }}
               >
                 <div className="card-action">
                   <ClockIcon size={16} className="clock-icon" />
